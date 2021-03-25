@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5250F0DA260C71E50053783C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5250F0D9260C71E50053783C /* main.swift */; };
 		5250F0E2260C72070053783C /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5250F0E1260C72070053783C /* Monster.swift */; };
+		5250F0F9260C723F0053783C /* Town.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5250F0F8260C723F0053783C /* Town.swift */; };
+		5250F0FC260C72740053783C /* Zombie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5250F0FB260C72740053783C /* Zombie.swift */; };
+		5250F0FF260C729D0053783C /* Mayor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5250F0FE260C729D0053783C /* Mayor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +30,9 @@
 		5250F0D6260C71E50053783C /* MonsterTownWithCh16Challenges */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MonsterTownWithCh16Challenges; sourceTree = BUILT_PRODUCTS_DIR; };
 		5250F0D9260C71E50053783C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5250F0E1260C72070053783C /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
+		5250F0F8260C723F0053783C /* Town.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Town.swift; sourceTree = "<group>"; };
+		5250F0FB260C72740053783C /* Zombie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zombie.swift; sourceTree = "<group>"; };
+		5250F0FE260C729D0053783C /* Mayor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mayor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				5250F0D9260C71E50053783C /* main.swift */,
+				5250F0FE260C729D0053783C /* Mayor.swift */,
 				5250F0E1260C72070053783C /* Monster.swift */,
+				5250F0F8260C723F0053783C /* Town.swift */,
+				5250F0FB260C72740053783C /* Zombie.swift */,
 			);
 			path = MonsterTownWithCh16Challenges;
 			sourceTree = "<group>";
@@ -122,7 +131,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5250F0F9260C723F0053783C /* Town.swift in Sources */,
+				5250F0FC260C72740053783C /* Zombie.swift in Sources */,
 				5250F0E2260C72070053783C /* Monster.swift in Sources */,
+				5250F0FF260C729D0053783C /* Mayor.swift in Sources */,
 				5250F0DA260C71E50053783C /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
