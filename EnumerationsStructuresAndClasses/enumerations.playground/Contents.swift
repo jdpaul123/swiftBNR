@@ -45,13 +45,17 @@ case .justify:
 
 
 // The rawValue will default to the case name if no value is given for String enums
-enum ProgrammingLanguage: String {
+// Chapter 19 Electrum Challenge using Caseiterable below down to line 59
+enum ProgrammingLanguage: String, CaseIterable {
     case swift
     case objectiveC     = "objective-c"
     case c
     case cpp            = "c++"
     case java
 }
+print("There are \(ProgrammingLanguage.allCases.count) languages")
+let caseList = ProgrammingLanguage.allCases.map({ "\"\($0)\"" }).joined(separator: ", ")
+print("[\(caseList)]")
 
 let myFavoriteLanguage = ProgrammingLanguage.swift
 print("My favorite programming language is \(myFavoriteLanguage.rawValue)")
