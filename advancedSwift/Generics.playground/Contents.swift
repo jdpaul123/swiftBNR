@@ -38,6 +38,17 @@ struct Stack<Element>: Sequence {
             self.push(item)
         }
     }
+    
+    // Bronze Challenge Chapter 21
+    func filter(_ close: (Element) -> Bool) -> Stack<Element> {
+        var filteredItems = [Element]()
+        for item in items {
+            if close(item) {
+                filteredItems.append(item)
+            }
+        }
+        return Stack<Element>(items: filteredItems)
+    }
 }
 
 var intStack = Stack<Int>()
@@ -163,3 +174,32 @@ struct Restaurant {
 let restaurant = Restaurant()
 let toast = restaurant.makeToast()
 eat(toast)
+
+// Silver Challenge Chapter 21
+func findAll<T: Equatable>(_ items: [T], _ elem: T) -> [Int] {
+    var returnArray = [Int]()
+    var count = 0
+    for item in items {
+        if item == elem {
+            returnArray.append(count)
+        }
+        count += 1
+    }
+    return returnArray
+}
+
+// Gold Challenge Chapter 21
+//func findAllGold<T: Equatable, U: Collection>(_ items: U, _ elem: T) -> [Int] {
+//    var returnArray = [Int]()
+//    var count = 0
+//    for item in U {
+//        if item == elem {
+//            returnArray.append(count)
+//        }
+//        count += 1
+//    }
+//    return returnArray
+//}
+
+var ex = [1, 2, 3, 2, 4, 2]
+findAll(ex, 2)
