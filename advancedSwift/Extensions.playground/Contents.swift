@@ -4,6 +4,25 @@ extension Double {
     var squared: Double { return self * self }
 }
 
+
+// Silver Challenge Chapter 20 is this entire Int extension
+extension Int {
+    enum evenOrOdd {
+        case even, odd
+    }
+    
+    var eoro: evenOrOdd {
+        if self % 2 == 0 {
+            return .even
+        } else {
+            return .odd
+        }
+    }
+}
+
+let nun: Int = 1
+nun.eoro
+
 let sideLength: Double = 12.5
 let area = sideLength.squared
 
