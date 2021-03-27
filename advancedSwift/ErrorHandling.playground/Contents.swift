@@ -3,6 +3,9 @@ import Cocoa
 enum Token: CustomStringConvertible {
     case number(Int)
     case plus
+    case minus
+    case multiplier
+    case divisor
     
     var description: String {
         switch self {
@@ -10,13 +13,21 @@ enum Token: CustomStringConvertible {
             return "Number: \(n)"
         case .plus:
             return "Symbol: +"
+        case .minus:
+            return "Symbol: -"
+        // Gold Challenge Chapter 23: Adding multiplier and divsor with recursive decent
+        case .multiplier:
+            return "Symbol: *"
+        case .divisor:
+            return "Symbol: /"
         }
     }
 }
 
 class Lexer {
     enum Error: Swift.Error {
-        case invalidCharacter(Character)
+        // Silver Challenge (part of) chapter 23
+        case invalidCharacter(Character, String.Index)
     }
     
     let input: String
@@ -70,16 +81,26 @@ class Lexer {
                 // Start of a number - need to grab the res
                 let value = getNumber()
                 tokens.append(.number(value))
+            case "*":
+                tokens.append(.multiplier)
+                advance()
+            case "/":
+                tokens.append(.divisor)
+                advance()
             case "+":
                 tokens.append(.plus)
+                advance()
+            case "-":
+                tokens.append(.minus)
                 advance()
             case " ":
                 // Just advance to ignore spaces
                 advance()
-                
+            
             default:
-                // Somethign unexpected - need to send back an error
-                throw Lexer.Error.invalidCharacter(nextCharacter)
+                // Something unexpected - need to send back an error
+                // Silver Challenge (part of) chapter 23
+                throw Lexer.Error.invalidCharacter(nextCharacter, position)
             }
         }
         return tokens
@@ -92,7 +113,7 @@ class Parser {
         case invalidToken(Token)
     }
     
-    let tokens: [Token]
+    var tokens: [Token]
     var position = 0
     
     init(tokens: [Token]) {
@@ -109,6 +130,7 @@ class Parser {
     }
     
     func getNumber() throws -> Int {
+        
         guard let token = getNextToken() else {
             throw Parser.Error.unexpextedEndOfInput
         }
@@ -118,7 +140,63 @@ class Parser {
             return value
         case .plus:
             throw Parser.Error.invalidToken(token)
+        case .minus:
+            throw Parser.Error.invalidToken(token)
+        case .multiplier:
+            throw Parser.Error.invalidToken(token)
+        case .divisor:
+            throw Parser.Error.invalidToken(token)
         }
+    }
+    
+    func parseE() throws -> Int {
+        var value = try getNumber()
+        while let token = getNextToken() {
+            switch token {
+            
+            // Getting a plus after a number is legal
+            case .plus:
+                // After a plus, we must get another number
+                let nextNumber = try getNumber()
+                value += nextNumber
+            case .minus:
+                let nextNumber = try getNumber()
+                value -= nextNumber
+                
+            // Getting a number after a number is not legal
+            case .number:
+                throw Parser.Error.invalidToken(token)
+            case .multiplier:
+                throw Parser.Error.invalidToken(token)
+            case .divisor:
+                throw Parser.Error.invalidToken(token)
+            }
+        }
+        
+        return value
+    }
+    
+    func parseT() throws -> Int {
+        // Parse the term with mult or div
+        var value = try getNumber()
+        
+        while let token = getNextToken() {
+            switch token {
+            case .multiplier:
+                let nextNumber = try getNumber()
+                value *= nextNumber
+            case .divisor:
+                let nextNumber = try getNumber()
+                value /= nextNumber
+            case .number:
+                throw Parser.Error.invalidToken(token)
+            case .plus:
+                throw Parser.Error.invalidToken(token)
+            case .minus:
+                throw Parser.Error.invalidToken(token)
+            }
+        }
+        return value
     }
     
     func parse() throws -> Int {
@@ -133,29 +211,44 @@ class Parser {
                 // After a plus, we must get another number
                 let nextNumber = try getNumber()
                 value += nextNumber
+            case .minus:
+                let nextNumber = try getNumber()
+                value -= nextNumber
                 
             // Getting a number after a number is not legal
             case .number:
+                throw Parser.Error.invalidToken(token)
+            case .multiplier:
+                throw Parser.Error.invalidToken(token)
+            case .divisor:
                 throw Parser.Error.invalidToken(token)
             }
         }
         
         return value
     }
-}
+    }
 
 func evaluate(_ input: String) {
     print("Evaluating: \(input)")
     let lexer = Lexer(input: input)
+//    guard let tokens = try? lexer.lex() else {
+//        print("Lexing failed, nint I don't know why")
+//        return
+//    }
+    
     do {
         let tokens = try lexer.lex()
         print("Lexer output: \(tokens)")
         
         let parser = Parser(tokens: tokens)
-        let result = try parser.parse()
-        print("Parser output: \(result)")
-    } catch Lexer.Error.invalidCharacter(let character) {
-        print("Input contained an invalid character: \(character)")
+        let resultT = try parser.parseT()
+        let resultE = try parser.parseE()
+        print("Parser output: \(resultE)")
+    } catch Lexer.Error.invalidCharacter(let character, let position) {
+        // Silver Challenge (part of) chapter 23 both the let position above, and to: position below
+        let distanceToPosition = input.distance(from: input.startIndex, to: position)
+        print("Input contained an invalid character at \(distanceToPosition): \(character)")
     } catch Parser.Error.unexpextedEndOfInput {
         print("Unexpected end of input during parsing")
     } catch Parser.Error.invalidToken(let token) {
@@ -166,3 +259,8 @@ func evaluate(_ input: String) {
 }
 
 evaluate("10 + 3 + 5")
+// Bronze Challenge Chapter 23: Adding functionality for minus (-)
+evaluate("10 + 5 - 3 - 1")
+evaluate("10 * 3 + 5 * 3")
+
+// COME BACK TO THE CHAPTER 23 GOLD CHALLENGE!
