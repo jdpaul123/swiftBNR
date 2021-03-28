@@ -11,7 +11,7 @@ var myTown = Town(population: 0, stopLights: 6)
 myTown?.printDescription()
 let myTownSize = myTown?.townSize
 print(String(describing: myTownSize))
-myTown?.changePopulation(by: 1_000_000)
+myTown?.changePopulation(by: 100000000)
 print("Size: \(String(describing: myTown?.townSize)); population \(String(describing: myTown?.population))")
 
 

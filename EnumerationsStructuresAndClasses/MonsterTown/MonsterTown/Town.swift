@@ -10,13 +10,15 @@ import Foundation
 struct Town {
     static let world = "Earth"
     let region: String
-    var population: Int {
-        didSet(oldPopulation) {
-            if population < oldPopulation {
-                print("The population has changed to \(population) from \(oldPopulation).")
-            }
-        }
-    }
+    // The line below is for Chapter 26 Bronze challenge, hence why the 7 lines below the line below are commented out
+    @Logged(warningValue: 50) var population: Int = 100
+//    {
+//        didSet(oldPopulation) {
+//            if population < oldPopulation {
+//                print("The population has changed to \(population) from \(oldPopulation).")
+//            }
+//        }
+//    }
     
     var numberOfStopLights: Int
     

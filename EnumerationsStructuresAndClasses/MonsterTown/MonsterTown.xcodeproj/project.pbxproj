@@ -11,6 +11,7 @@
 		52658DBC260C6CD400C9B17C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52658DBB260C6CD400C9B17C /* main.swift */; };
 		52658DC4260C6CFC00C9B17C /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52658DC3260C6CFC00C9B17C /* Monster.swift */; };
 		52658DC7260C6D1F00C9B17C /* Town.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52658DC6260C6D1F00C9B17C /* Town.swift */; };
+		528036AE26112F7D002B1584 /* Logged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528036AD26112F7D002B1584 /* Logged.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		52658DBB260C6CD400C9B17C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		52658DC3260C6CFC00C9B17C /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
 		52658DC6260C6D1F00C9B17C /* Town.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Town.swift; sourceTree = "<group>"; };
+		528036AD26112F7D002B1584 /* Logged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logged.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				52658DC3260C6CFC00C9B17C /* Monster.swift */,
 				52658DC6260C6D1F00C9B17C /* Town.swift */,
 				5250F096260C6E580053783C /* Zombie.swift */,
+				528036AD26112F7D002B1584 /* Logged.swift */,
 			);
 			path = MonsterTown;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528036AE26112F7D002B1584 /* Logged.swift in Sources */,
 				52658DC7260C6D1F00C9B17C /* Town.swift in Sources */,
 				5250F097260C6E580053783C /* Zombie.swift in Sources */,
 				52658DC4260C6CFC00C9B17C /* Monster.swift in Sources */,
