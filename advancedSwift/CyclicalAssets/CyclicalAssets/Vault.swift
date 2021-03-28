@@ -40,6 +40,7 @@ class Vault {
 //            assets.remove(at: index)
 //        }
 //    }
+
 }
 
 extension Vault: CustomStringConvertible {

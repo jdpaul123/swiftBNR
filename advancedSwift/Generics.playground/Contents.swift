@@ -203,3 +203,21 @@ func findAll<T: Equatable>(_ items: [T], _ elem: T) -> [Int] {
 
 var ex = [1, 2, 3, 2, 4, 2]
 findAll(ex, 2)
+
+/*
+// There is an infinite loop somewhere above so this is not running yer
+extension Stack where Element: Equatable {
+    static func ==(lhs: Stack, rhs: Stack) -> Bool {
+        return lhs.items == rhs.items
+    }
+}
+
+let myTasks = Stack(items: ["Clean up"])
+let yourTasks = Stack(items: ["Master Swift"])
+print(myTasks == yourTasks)
+
+class Pancake { }
+let breakfast = Stack(items: [Pancake(), Pancake()])
+let lunch = Stack(items: [Pancake()])
+breakfast == lunch
+*/
