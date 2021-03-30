@@ -6,17 +6,29 @@
 //
 
 import Foundation
+import ArgumentParser
 
-struct Wordlasso {
+struct Wordlasso: ParsableCommand {
+    @Argument(help: """
+        The word template to match, with \(WordFinder.wildcard) as \
+        placeholders. Leaving this blank will enter interactive mode.
+        """)
+    var template: String?
+    
+    @Flag(name: .shortAndLong, help: "Perform case-insensitive matches.")
+    var ignoreCase: Bool = false
+    
+    @Option(name: .customLong("wordfile"), help: "Path to a newline-delimited word list.")
+    var wordListPath: String = "/usr/share/dict/words"
+    
     func run() throws {
-        let path = "/usr/share/dict/words"
-        let wordFinder = try WordFinder(wordListPath: path, ignoreCase: true)
+        let wordFinder = try WordFinder(wordListPath: wordListPath, ignoreCase: ignoreCase)
         
         let args = CommandLine.arguments
         print("Command-line arguments: \(args)")
         
-        if args.count > 1 {
-            let template = args[1]
+        
+        if let template = template {
             findAndPrintMatches(for: template, using: wordFinder)
         } else {
             while true {
@@ -37,8 +49,4 @@ struct Wordlasso {
     }
 }
 
-do {
-    try Wordlasso().run()
-} catch {
-    fatalError("Program exited unexpectedly. \(error)")
-}
+Wordlasso.main()
